@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PurchaseService {
-    PurchaseRepository repo;
+    private PurchaseRepository repo;
 
     //TODO add exception throwing to methods
     //TODO write Service tests

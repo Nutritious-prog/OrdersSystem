@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AddressService {
-    AddressRepository repo;
+    private AddressRepository repo;
 
     //TODO add exception throwing to methods
     //TODO write Service tests

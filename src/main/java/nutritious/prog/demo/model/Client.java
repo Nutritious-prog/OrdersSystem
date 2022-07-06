@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Client")
@@ -34,5 +35,18 @@ public class Client {
 
     public void setDiscount(double discount) {
         this.discount = discount;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Client)) return false;
+        Client client = (Client) o;
+        return Double.compare(client.getDiscount(), getDiscount()) == 0 && getName().equals(client.getName()) && getAddress().equals(client.getAddress());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getAddress(), getDiscount());
     }
 }

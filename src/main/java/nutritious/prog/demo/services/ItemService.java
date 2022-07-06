@@ -9,7 +9,7 @@ import java.util.List;
 
 @Service
 public class ItemService {
-   ItemRepository repo;
+    private ItemRepository repo;
 
     //TODO add exception throwing to methods
     //TODO write Service tests
