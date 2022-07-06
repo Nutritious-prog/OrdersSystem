@@ -4,7 +4,9 @@ import nutritious.prog.demo.model.Client;
 import nutritious.prog.demo.model.Item;
 import nutritious.prog.demo.model.Purchase;
 import nutritious.prog.demo.repositories.PurchaseRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PurchaseService {
     PurchaseRepository repo;
 

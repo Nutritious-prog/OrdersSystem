@@ -2,10 +2,12 @@ package nutritious.prog.demo.services;
 
 import nutritious.prog.demo.model.Item;
 import nutritious.prog.demo.repositories.ItemRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ItemService {
    ItemRepository repo;
 

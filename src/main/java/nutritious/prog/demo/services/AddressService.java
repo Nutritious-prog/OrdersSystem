@@ -2,7 +2,9 @@ package nutritious.prog.demo.services;
 
 import nutritious.prog.demo.model.Address;
 import nutritious.prog.demo.repositories.AddressRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AddressService {
     AddressRepository repo;
 
