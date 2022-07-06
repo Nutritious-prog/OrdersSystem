@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Purchase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int ID;
+    private Long ID;
     @ManyToOne
     @JoinColumn(name = "client_id", referencedColumnName = "client_ID")
     private Client client;

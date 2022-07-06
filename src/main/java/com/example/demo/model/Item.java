@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int item_ID;
+    private Long item_ID;
     @Column(name = "name", nullable = false)
     private String name;
     @Column(name = "price", nullable = false)

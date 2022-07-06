@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,11 +11,12 @@ import javax.persistence.*;
 @Table(name = "Client")
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int client_ID;
+    private Long client_ID;
     @Column(name = "name", columnDefinition = "TEXT")
     private String name;
     @OneToOne

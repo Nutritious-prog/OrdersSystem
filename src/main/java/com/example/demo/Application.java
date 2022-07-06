@@ -1,13 +1,10 @@
 package com.example.demo;
 
-import com.example.demo.model.Address;
-import com.example.demo.model.Client;
-import com.example.demo.model.Item;
-import com.example.demo.model.Purchase;
 import com.example.demo.repositories.AddressRepository;
 import com.example.demo.repositories.ItemRepository;
 import com.example.demo.repositories.PurchaseRepository;
-import com.example.demo.repositories.UserRepository;
+import com.example.demo.repositories.ClientRepository;
+import com.example.demo.services.ClientService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -22,8 +19,8 @@ public class Application {
         AddressRepository addressRepository =
                 configurableApplicationContext.getBean(AddressRepository.class);
 
-        UserRepository userRepository =
-                configurableApplicationContext.getBean(UserRepository.class);
+        ClientRepository clientRepository =
+                configurableApplicationContext.getBean(ClientRepository.class);
 
         ItemRepository itemRepository =
                 configurableApplicationContext.getBean(ItemRepository.class);
@@ -31,7 +28,7 @@ public class Application {
         PurchaseRepository purchaseRepository =
                 configurableApplicationContext.getBean(PurchaseRepository.class);
 
-        Address address = new Address("Jugoslowianska 13c", "Lodz", "Lodzkie", "92-720", "Polska");
+        /*Address address = new Address("Jugoslowianska 13c", "Lodz", "Lodzkie", "92-720", "Polska");
         addressRepository.save(address);
 
         Address address2 = new Address("Pomorska 452", "Lodz", "Lodzkie", "92-720", "Polska");
@@ -59,9 +56,18 @@ public class Application {
         Purchase purchase2 = new Purchase(watermelon, client, 14.99);
 
         purchaseRepository.save(purchase);
-        purchaseRepository.save(purchase2);
+        purchaseRepository.save(purchase2);*/
 
-        System.out.println(userRepository.count());
+        /*System.out.println(clientRepository.count());
+        System.out.println(userRepository.findById(4L));
+        System.out.println(clientRepository.findAll());
+        clientRepository.deleteById(4L);
+        System.out.println("After delete: " + clientRepository.findAll());*/
+
+        ClientService clientService =
+                configurableApplicationContext.getBean(ClientService.class);
+
+       // clientService.updateClient(1L, "Piotr Skarga");
     }
 
 }

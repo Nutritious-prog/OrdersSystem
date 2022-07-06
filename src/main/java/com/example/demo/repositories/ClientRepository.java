@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<Client, Long> {
+public interface ClientRepository extends CrudRepository<Client, Long> {
+    //List<Client> findByOrderByIDAsc();
 }
