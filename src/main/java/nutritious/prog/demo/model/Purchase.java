@@ -1,7 +1,8 @@
-package com.example.demo.model;
+package nutritious.prog.demo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "Purchase")
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Purchase {
     @Id
@@ -31,6 +33,6 @@ public class Purchase {
     }
 
     public double getActualOrderPrice(){
-        return item.getPrice() + getShippingPrice();
+        return item.getPrice() - this.getClient().getDiscount() * item.getPrice() + getShippingPrice();
     }
 }

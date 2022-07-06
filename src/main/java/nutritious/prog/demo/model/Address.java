@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package nutritious.prog.demo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

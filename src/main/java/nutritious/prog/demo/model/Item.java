@@ -1,7 +1,8 @@
-package com.example.demo.model;
+package nutritious.prog.demo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table(name = "Item")
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Item {
     @Id

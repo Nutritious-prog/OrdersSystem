@@ -1,10 +1,10 @@
-package com.example.demo;
+package nutritious.prog.demo;
 
-import com.example.demo.repositories.AddressRepository;
-import com.example.demo.repositories.ItemRepository;
-import com.example.demo.repositories.PurchaseRepository;
-import com.example.demo.repositories.ClientRepository;
-import com.example.demo.services.ClientService;
+import nutritious.prog.demo.repositories.AddressRepository;
+import nutritious.prog.demo.repositories.ItemRepository;
+import nutritious.prog.demo.repositories.PurchaseRepository;
+import nutritious.prog.demo.repositories.ClientRepository;
+import nutritious.prog.demo.services.ClientService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -68,6 +68,12 @@ public class Application {
                 configurableApplicationContext.getBean(ClientService.class);
 
        // clientService.updateClient(1L, "Piotr Skarga");
+
+        try{
+            clientService.updateClientDiscount(12L, -5);
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

@@ -1,4 +1,4 @@
-package com.example.demo.model;
+package nutritious.prog.demo.model;
 
 public class GoldenClient extends Client{
     public GoldenClient(String name, Address address, double discount) {

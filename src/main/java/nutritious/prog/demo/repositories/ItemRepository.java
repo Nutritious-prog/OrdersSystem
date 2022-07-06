@@ -1,6 +1,6 @@
-package com.example.demo.repositories;
+package nutritious.prog.demo.repositories;
 
-import com.example.demo.model.Item;
+import nutritious.prog.demo.model.Item;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
