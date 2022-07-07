@@ -1,6 +1,7 @@
 package nutritious.prog.demo.services;
 
 import nutritious.prog.demo.exceptions.InvalidArgumentException;
+import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
 import nutritious.prog.demo.exceptions.ObjectNotFoundException;
 import nutritious.prog.demo.model.Address;
 import nutritious.prog.demo.repositories.AddressRepository;
@@ -12,9 +13,8 @@ public class AddressService {
 
     //TODO write Service tests
 
-    public boolean saveAddress(String street, String city,
-                            String voivodeship, String postalCode,
-                            String country) throws InvalidArgumentException {
+    public boolean saveAddress(String street, String city, String voivodeship, String postalCode, String country)
+            throws InvalidArgumentException, ObjectAlreadyExistsException {
         if(street.isEmpty() || city.isEmpty() || voivodeship.isEmpty() || postalCode.isEmpty() || country.isEmpty()) {
             throw new InvalidArgumentException("Invalid arguments.");
         }
@@ -25,7 +25,7 @@ public class AddressService {
         Iterable<Address> addresses = repo.findAll();
         for(Address address : addresses) {
             if(address.equals(a)) {
-                throw new ObjectNotFoundException("Object with the same data already exists in db.");
+                throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
             }
         }
         repo.save(a);

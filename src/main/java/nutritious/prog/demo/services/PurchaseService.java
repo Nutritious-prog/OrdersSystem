@@ -1,5 +1,8 @@
 package nutritious.prog.demo.services;
 
+import nutritious.prog.demo.exceptions.InvalidArgumentException;
+import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
+import nutritious.prog.demo.exceptions.ObjectNotFoundException;
 import nutritious.prog.demo.model.Client;
 import nutritious.prog.demo.model.Item;
 import nutritious.prog.demo.model.Purchase;
@@ -10,25 +13,29 @@ import org.springframework.stereotype.Service;
 public class PurchaseService {
     private PurchaseRepository repo;
 
-    //TODO add exception throwing to methods
     //TODO write Service tests
 
-    public void savePurchase(Item item, Client client, double shippingPrice) {
+    public void savePurchase(Item item, Client client, double shippingPrice) throws InvalidArgumentException, ObjectAlreadyExistsException {
+        if(item == null || client == null || shippingPrice < 0) throw new InvalidArgumentException("Invalid arguments.");
+
         Purchase p = new Purchase(item, client, shippingPrice);
+
+        //Checking if the same address already exists in db.
+        Iterable<Purchase> purchases = repo.findAll();
+        for(Purchase pur : purchases) {
+            if(pur.equals(p)) {
+                throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
+            }
+        }
+
         repo.save(p);
     }
 
     public int deletePurchase(Long id){
-        Purchase p = repo.findById(id).get();
-        if(p == null) return 1;
-        repo.delete(p);
-        return 0;
-    }
-
-    public int updatePurchaseShippingPrice(Long id, double shippingPrice) {
-        Purchase p = repo.findById(id).get();
-        if(p == null) return 1;
-        p.setShippingPrice(shippingPrice);
+        if(id <= 0) throw new InvalidArgumentException("Invalid arguments.");
+        boolean exists = repo.existsById(id);
+        if (exists == false) throw new ObjectNotFoundException("Object not found in db.");
+        repo.deleteById(id);
         return 0;
     }
 
