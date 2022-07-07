@@ -31,7 +31,6 @@ public class ClientService {
         Iterable<Client> clients = repo.findAll();
         for(Client client : clients) {
             if(c.equals(client)) throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
-            return;
         }
         repo.save(c);
     }
@@ -43,7 +42,6 @@ public class ClientService {
         Iterable<Client> clients = repo.findAll();
         for(Client client : clients) {
             if(c.equals(client)) throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
-            return;
         }
         repo.save(c);
     }

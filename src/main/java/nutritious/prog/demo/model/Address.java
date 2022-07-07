@@ -2,6 +2,7 @@ package nutritious.prog.demo.model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Table
 @NoArgsConstructor
 @Getter
+@Setter
 @ToString
 public class Address {
     @Id
