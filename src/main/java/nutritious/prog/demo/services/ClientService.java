@@ -1,5 +1,6 @@
 package nutritious.prog.demo.services;
 
+import lombok.Getter;
 import nutritious.prog.demo.exceptions.InvalidArgumentException;
 import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
 import nutritious.prog.demo.exceptions.ObjectNotFoundException;
@@ -9,13 +10,16 @@ import nutritious.prog.demo.repositories.AddressRepository;
 import nutritious.prog.demo.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Service
+@Getter
 public class ClientService {
-    private ClientRepository repo;
-    private AddressRepository addressRepo;
+    private final ClientRepository repo;
+    private final AddressRepository addressRepo;
+
+    public ClientService(ClientRepository clientRepository, AddressRepository addressRepository) {
+        this.repo = clientRepository;
+        this.addressRepo = addressRepository;
+    }
 
     //TODO write Service tests
 
@@ -27,15 +31,28 @@ public class ClientService {
         Iterable<Client> clients = repo.findAll();
         for(Client client : clients) {
             if(c.equals(client)) throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
+            return;
+        }
+        repo.save(c);
+    }
+
+    public void saveClient(Client c) throws InvalidArgumentException{
+        if (c == null) throw new InvalidArgumentException("Invalid argument.");
+
+        //Finding if user with exact same data exists
+        Iterable<Client> clients = repo.findAll();
+        for(Client client : clients) {
+            if(c.equals(client)) throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
+            return;
         }
         repo.save(c);
     }
 
     public int deleteClient(Long id) throws InvalidArgumentException, ObjectNotFoundException {
         if(id <= 0) throw new InvalidArgumentException("Invalid arguments.");
-        Client c = findClientByID(id);
-        if (c == null) throw new ObjectNotFoundException("Object not found in db.");
-        repo.delete(c);
+        boolean exists = repo.existsById(id);
+        if (exists == false) throw new ObjectNotFoundException("Object not found in db.");
+        repo.deleteById(id);
         return 0;
     }
 
@@ -47,7 +64,7 @@ public class ClientService {
         repo.save(c);
         return 0;
     }
-    public int updateClientAddress(Long id, Address address) throws InvalidArgumentException, ObjectNotFoundException {
+    public boolean updateClientAddress(Long id, Address address) throws InvalidArgumentException, ObjectNotFoundException {
         if(id <= 0 || address == null) throw new InvalidArgumentException("Invalid arguments.");
         Client c = repo.findById(id).get();
         if(c == null) throw new ObjectNotFoundException("Object not found in db.");
@@ -57,10 +74,10 @@ public class ClientService {
         // Checking if address already exists in db, if not add it to db.
         Iterable<Address> addresses = addressRepo.findAll();
         for(Address a : addresses) {
-            if(a.equals(address)) return 0;
+            if(a.equals(address)) return true;
         }
         addressRepo.save(address);
-        return 0;
+        return true;
     }
     public int updateClientDiscount(Long id, double discount) throws InvalidArgumentException, ObjectNotFoundException{
         if(discount < 0 || id <= 0) throw new InvalidArgumentException("Invalid arguments.");
@@ -76,12 +93,7 @@ public class ClientService {
         return c;
     }
 
-    public List<Client> findClientsByName(String name){
-        Iterable<Client> clients = repo.findAll();
-        List<Client> foundClients = new ArrayList<>();
-        for(Client c : clients) {
-            if(c.getName().equals(name)) foundClients.add(c);
-        }
-        return foundClients;
+    public Iterable<Client> findAllClients() {
+        return repo.findAll();
     }
 }
