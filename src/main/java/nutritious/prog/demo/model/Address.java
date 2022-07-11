@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table
@@ -34,5 +35,18 @@ public class Address {
         this.voivodeship = voivodeship;
         this.postalCode = postalCode;
         this.country = country;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Address)) return false;
+        Address address = (Address) o;
+        return getStreet().equals(address.getStreet()) && getCity().equals(address.getCity()) && getVoivodeship().equals(address.getVoivodeship()) && getPostalCode().equals(address.getPostalCode()) && getCountry().equals(address.getCountry());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getStreet(), getCity(), getVoivodeship(), getPostalCode(), getCountry());
     }
 }

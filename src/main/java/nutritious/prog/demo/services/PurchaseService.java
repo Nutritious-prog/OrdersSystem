@@ -1,5 +1,6 @@
 package nutritious.prog.demo.services;
 
+import lombok.AllArgsConstructor;
 import nutritious.prog.demo.exceptions.InvalidArgumentException;
 import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
 import nutritious.prog.demo.exceptions.ObjectNotFoundException;
@@ -10,6 +11,7 @@ import nutritious.prog.demo.repositories.PurchaseRepository;
 import org.springframework.stereotype.Service;
 
 @Service
+@AllArgsConstructor
 public class PurchaseService {
     private PurchaseRepository repo;
 
@@ -43,5 +45,7 @@ public class PurchaseService {
         Purchase p = repo.findById(id).get();
         return p;
     }
+
+
 
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "Purchase")
@@ -34,5 +35,18 @@ public class Purchase {
 
     public double getActualOrderPrice(){
         return item.getPrice() - this.getClient().getDiscount() * item.getPrice() + getShippingPrice();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Purchase)) return false;
+        Purchase purchase = (Purchase) o;
+        return Double.compare(purchase.getShippingPrice(), getShippingPrice()) == 0 && getClient().equals(purchase.getClient()) && getItem().equals(purchase.getItem());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getClient(), getItem(), getShippingPrice());
     }
 }
