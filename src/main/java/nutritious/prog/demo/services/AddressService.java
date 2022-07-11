@@ -1,21 +1,25 @@
 package nutritious.prog.demo.services;
 
+import lombok.AllArgsConstructor;
 import nutritious.prog.demo.exceptions.InvalidArgumentException;
 import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
 import nutritious.prog.demo.exceptions.ObjectNotFoundException;
 import nutritious.prog.demo.model.Address;
 import nutritious.prog.demo.repositories.AddressRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 @Service
+@AllArgsConstructor
 public class AddressService {
     private AddressRepository repo;
 
-    //TODO write Service tests
-
-    public boolean saveAddress(String street, String city, String voivodeship, String postalCode, String country)
+    public boolean saveAddress(@NotNull String street, @NotNull String city, @NotNull String voivodeship, @NotNull String postalCode, @NotNull String country)
             throws InvalidArgumentException, ObjectAlreadyExistsException {
-        if(street.isEmpty() || city.isEmpty() || voivodeship.isEmpty() || postalCode.isEmpty() || country.isEmpty()) {
+        if(street.isEmpty() || city.isEmpty() || voivodeship.isEmpty() || postalCode.isEmpty() || !isPostalCodeValid(postalCode) || country.isEmpty()) {
             throw new InvalidArgumentException("Invalid arguments.");
         }
 
@@ -40,10 +44,10 @@ public class AddressService {
         return 0;
     }
 
-    public int updateAddress(Long id, String street, String city,
-                             String voivodeship, String postalCode,
-                             String country) throws InvalidArgumentException, ObjectNotFoundException{
-        if(street.isEmpty() || city.isEmpty() || voivodeship.isEmpty() || postalCode.isEmpty() || country.isEmpty())
+    public int updateAddress(Long id, @NotNull String street, @NotNull String city,
+                             @NotNull String voivodeship, @NotNull String postalCode,
+                             @NotNull String country) throws InvalidArgumentException, ObjectNotFoundException{
+        if(street.isEmpty() || city.isEmpty() || voivodeship.isEmpty() || !isPostalCodeValid(postalCode) || country.isEmpty())
             throw new InvalidArgumentException("Invalid arguments.");
 
         Address a = repo.findById(id).get();
@@ -63,5 +67,14 @@ public class AddressService {
     public Address findAddressByID(Long id) {
         Address a = repo.findById(id).get();
         return a;
+    }
+
+    protected boolean isPostalCodeValid(String postalCode) {
+        String regex = "^[0-9]{5}$"; // "Available patterns "12345", "09876" etc."
+
+        Pattern pattern = Pattern.compile(regex);
+
+        Matcher matcher = pattern.matcher(postalCode);
+        return matcher.matches();
     }
 }
