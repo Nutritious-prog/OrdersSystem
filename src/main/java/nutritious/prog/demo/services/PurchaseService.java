@@ -22,14 +22,6 @@ public class PurchaseService {
 
         Purchase p = new Purchase(item, client, shippingPrice);
 
-        //Checking if the same address already exists in db.
-        Iterable<Purchase> purchases = repo.findAll();
-        for(Purchase pur : purchases) {
-            if(pur.equals(p)) {
-                throw new ObjectAlreadyExistsException("Object with the same data already exists in db.");
-            }
-        }
-
         repo.save(p);
     }
 
