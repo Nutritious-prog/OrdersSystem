@@ -21,8 +21,6 @@ public class ClientService {
         this.addressRepo = addressRepository;
     }
 
-    //TODO write Service tests
-
     public void saveClient(String name, Address address, double discount) throws InvalidArgumentException, ObjectAlreadyExistsException {
         if(discount < 0 || address == null || name.length() == 0) throw new InvalidArgumentException("Invalid arguments.");
         Client c = new Client(name, address, discount);

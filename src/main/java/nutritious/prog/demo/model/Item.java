@@ -33,7 +33,7 @@ public class Item {
         if (this == o) return true;
         if (!(o instanceof Item)) return false;
         Item item = (Item) o;
-        return Double.compare(item.getPrice(), getPrice()) == 0 && getItem_ID().equals(item.getItem_ID()) && getName().equals(item.getName());
+        return Double.compare(item.getPrice(), getPrice()) == 0 && getName().equals(item.getName());
     }
 
     @Override

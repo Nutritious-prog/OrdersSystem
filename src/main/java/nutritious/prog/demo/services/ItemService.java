@@ -1,22 +1,23 @@
 package nutritious.prog.demo.services;
 
+import lombok.AllArgsConstructor;
 import nutritious.prog.demo.exceptions.InvalidArgumentException;
 import nutritious.prog.demo.exceptions.ObjectAlreadyExistsException;
 import nutritious.prog.demo.exceptions.ObjectNotFoundException;
 import nutritious.prog.demo.model.Item;
 import nutritious.prog.demo.repositories.ItemRepository;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ItemService {
     private ItemRepository repo;
 
-    //TODO write Service tests
-
-    public void saveItem(String name, double price) throws InvalidArgumentException, ObjectAlreadyExistsException {
+    public void saveItem(@NotNull String name, double price) throws InvalidArgumentException, ObjectAlreadyExistsException {
         if(name.isEmpty() || price <= 0) throw new InvalidArgumentException("Invalid arguments.");
         Item i = new Item(name, price);
 
@@ -59,7 +60,7 @@ public class ItemService {
         return i;
     }
 
-    public List<Item> findItemsByName(String name) throws InvalidArgumentException{
+    public List<Item> findItemsByName(@NotNull String name) throws InvalidArgumentException{
         if(name.isEmpty() )
             throw new InvalidArgumentException("Invalid arguments.");
 

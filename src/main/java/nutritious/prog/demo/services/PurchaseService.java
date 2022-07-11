@@ -15,8 +15,6 @@ import org.springframework.stereotype.Service;
 public class PurchaseService {
     private PurchaseRepository repo;
 
-    //TODO write Service tests
-
     public void savePurchase(Item item, Client client, double shippingPrice) throws InvalidArgumentException, ObjectAlreadyExistsException {
         if(item == null || client == null || shippingPrice < 0) throw new InvalidArgumentException("Invalid arguments.");
 
