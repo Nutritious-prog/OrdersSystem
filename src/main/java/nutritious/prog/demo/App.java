@@ -1,22 +1,18 @@
 package nutritious.prog.demo;
 
-import nutritious.prog.demo.repositories.AddressRepository;
-import nutritious.prog.demo.repositories.ItemRepository;
-import nutritious.prog.demo.repositories.PurchaseRepository;
-import nutritious.prog.demo.repositories.ClientRepository;
-import nutritious.prog.demo.services.ClientService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
-public class Application {
+public abstract class App {
 
     public static void main(String[] args) {
-        ConfigurableApplicationContext configurableApplicationContext =
-                SpringApplication.run(Application.class, args);
 
-        AddressRepository addressRepository =
+         ConfigurableApplicationContext configurableApplicationContext =
+                SpringApplication.run(App.class, args);
+
+        /*AddressRepository addressRepository =
                 configurableApplicationContext.getBean(AddressRepository.class);
 
         ClientRepository clientRepository =
@@ -26,7 +22,7 @@ public class Application {
                 configurableApplicationContext.getBean(ItemRepository.class);
 
         PurchaseRepository purchaseRepository =
-                configurableApplicationContext.getBean(PurchaseRepository.class);
+                configurableApplicationContext.getBean(PurchaseRepository.class);*/
 
         /*Address address = new Address("Jugoslowianska 13c", "Lodz", "Lodzkie", "92-720", "Polska");
         addressRepository.save(address);
@@ -64,16 +60,9 @@ public class Application {
         clientRepository.deleteById(4L);
         System.out.println("After delete: " + clientRepository.findAll());*/
 
-        ClientService clientService =
-                configurableApplicationContext.getBean(ClientService.class);
+//        ClientService clientService =
+//                configurableApplicationContext.getBean(ClientService.class);
 
-       // clientService.updateClient(1L, "Piotr Skarga");
-
-        try{
-            clientService.updateClientDiscount(12L, -5);
-        }catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
 }
