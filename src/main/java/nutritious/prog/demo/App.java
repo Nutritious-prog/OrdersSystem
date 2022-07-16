@@ -1,5 +1,13 @@
 package nutritious.prog.demo;
 
+import nutritious.prog.demo.model.Address;
+import nutritious.prog.demo.model.Client;
+import nutritious.prog.demo.model.Item;
+import nutritious.prog.demo.model.Purchase;
+import nutritious.prog.demo.repositories.AddressRepository;
+import nutritious.prog.demo.repositories.ClientRepository;
+import nutritious.prog.demo.repositories.ItemRepository;
+import nutritious.prog.demo.repositories.PurchaseRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
@@ -12,7 +20,7 @@ public abstract class App {
          ConfigurableApplicationContext configurableApplicationContext =
                 SpringApplication.run(App.class, args);
 
-        /*AddressRepository addressRepository =
+        AddressRepository addressRepository =
                 configurableApplicationContext.getBean(AddressRepository.class);
 
         ClientRepository clientRepository =
@@ -22,25 +30,25 @@ public abstract class App {
                 configurableApplicationContext.getBean(ItemRepository.class);
 
         PurchaseRepository purchaseRepository =
-                configurableApplicationContext.getBean(PurchaseRepository.class);*/
+                configurableApplicationContext.getBean(PurchaseRepository.class);
 
-        /*Address address = new Address("Jugoslowianska 13c", "Lodz", "Lodzkie", "92-720", "Polska");
+        Address address = new Address("Jugoslowianska 13c", "Lodz", "Lodzkie", "92-720", "Polska");
         addressRepository.save(address);
 
         Address address2 = new Address("Pomorska 452", "Lodz", "Lodzkie", "92-720", "Polska");
         addressRepository.save(address2);
 
         Client client = new Client("Jan Kowalski", address, 0.1);
-        userRepository.save(client);
+        clientRepository.save(client);
 
         Client client2 = new Client("Adam Kowalski", address, 0.2);
-        userRepository.save(client2);
+        clientRepository.save(client2);
 
         Client client3 = new Client("Piotr Kowalski", address2, 0.3);
-        userRepository.save(client3);
+        clientRepository.save(client3);
 
         Client client4 = new Client("Krzysztof Nowak", address2, 0.3);
-        userRepository.save(client4);
+        clientRepository.save(client4);
 
         Item apple = new Item("Apple", 3.5);
         Item watermelon = new Item("Watermelon", 10.0);
@@ -52,7 +60,7 @@ public abstract class App {
         Purchase purchase2 = new Purchase(watermelon, client, 14.99);
 
         purchaseRepository.save(purchase);
-        purchaseRepository.save(purchase2);*/
+        purchaseRepository.save(purchase2);
 
         /*System.out.println(clientRepository.count());
         System.out.println(userRepository.findById(4L));
